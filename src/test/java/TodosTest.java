@@ -45,23 +45,29 @@ public class TodosTest {
     }
 
     @Test
-    public void testSearchForTask() {
-        Task[] foundTasks = todos.search("родителям");
-        Assertions.assertEquals(1, foundTasks.length);
-        Assertions.assertEquals(5, foundTasks[0].getId());
+    public void testSearchByQueryInTitle() {
+        Task[] expected = {todos.findById(5)};
+        Task[] actual = todos.search("родителям");
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void testSearchForEpic() {
-        Task[] foundTasks = todos.search("Молоко");
-        Assertions.assertEquals(1, foundTasks.length);
-        Assertions.assertEquals(55, foundTasks[0].getId());
+    public void testSearchByQueryInSubtasks() {
+        Task[] expected = {todos.findById(55)};
+        Task[] actual = todos.search("Молоко");
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void testSearchForMeeting() {
-        Task[] foundTasks = todos.search("приложения");
-        Assertions.assertEquals(1, foundTasks.length);
-        Assertions.assertEquals(555, foundTasks[0].getId());
+    public void testSearchByQueryInTopicOrProject() {
+        Task[] expected = {todos.findById(555)};
+        Task[] actual = todos.search("приложения");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testFindByIdNotFound() {
+        Task task = todos.findById(100);
+        Assertions.assertNull(task);
     }
 }
