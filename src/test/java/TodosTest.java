@@ -70,4 +70,25 @@ public class TodosTest {
         Task task = todos.findById(100);
         Assertions.assertNull(task);
     }
+
+    @Test
+    public void testFindByIdMultiple() {
+        Task[] expected = {todos.findById(5), todos.findById(55), todos.findById(555)};
+        Task[] actual = new Task[]{todos.findById(5), todos.findById(55), todos.findById(555)};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testFindByIdSingle() {
+        Task task = todos.findById(5);
+        Assertions.assertNotNull(task);
+        Assertions.assertEquals(5, task.getId());
+    }
+
+    @Test
+    public void testFindByIdNoResults() {
+        Task[] expected = {};
+        Task[] actual = new Task[0];
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
