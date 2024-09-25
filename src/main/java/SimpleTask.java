@@ -8,6 +8,11 @@ public class SimpleTask extends Task {
 
     @Override
     public boolean matches(String query) {
-        return title.toLowerCase().contains(query.toLowerCase());
+        if (title.contains(query)) {
+            return true;
+        }
+        return false;
     }
+
+
 }

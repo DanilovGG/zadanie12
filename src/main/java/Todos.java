@@ -28,13 +28,4 @@ public class Todos {
         }
         return result;
     }
-
-    public Task findById(int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        return null;
-    }
 }

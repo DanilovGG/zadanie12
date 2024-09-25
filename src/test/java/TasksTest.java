@@ -4,56 +4,43 @@ import org.junit.jupiter.api.Test;
 
 public class TasksTest {
 
+    private Meeting meeting;
     private SimpleTask simpleTask;
     private Epic epic;
-    private Meeting meeting;
+    private Todos todos;
 
     @BeforeEach
     public void setUp() {
+        meeting = new Meeting(555, "Выкатка 3й версии приложения", "Приложение НетоБанка", "12-01-2023 18:00");
         simpleTask = new SimpleTask(5, "Позвонить родителям");
-        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
-        epic = new Epic(55, subtasks);
-        meeting = new Meeting(
-                555,
-                "Выкатка 3й версии приложения",
-                "Приложение НетоБанка",
-                "Во вторник после обеда"
-        );
+        epic = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
     }
 
     @Test
     public void testSimpleTaskMatches() {
         Assertions.assertTrue(simpleTask.matches("родителям"));
-        Assertions.assertFalse(simpleTask.matches("покупки"));
+        Assertions.assertFalse(simpleTask.matches("Молоко"));
     }
 
     @Test
     public void testEpicMatches() {
         Assertions.assertTrue(epic.matches("Молоко"));
-        Assertions.assertFalse(epic.matches("Сыр"));
+        Assertions.assertTrue(epic.matches("Яйца"));
+        Assertions.assertTrue(epic.matches("Хлеб"));
+        Assertions.assertFalse(epic.matches("Приложение"));
     }
 
     @Test
     public void testMeetingMatches() {
         Assertions.assertTrue(meeting.matches("приложения"));
-        Assertions.assertFalse(meeting.matches("отчёта"));
-    }
-
-    @Test
-    public void testMeetingMatchesWithQueryInProject() {
-        Meeting meeting = new Meeting(
-                555,
-                "Выкатка 3й версии приложения",
-                "Приложение НетоБанка",
-                "Во вторник после обеда"
-        );
         Assertions.assertTrue(meeting.matches("НетоБанка"));
+        Assertions.assertFalse(meeting.matches("Молоко"));
     }
 
     @Test
     public void testDefaultMatchesBehavior() {
         Task task = new Task(1);
-        Assertions.assertFalse(task.matches("что-то"));
+        Assertions.assertFalse(task.matches("что угодно"));
     }
 
     @Test
@@ -80,7 +67,7 @@ public class TasksTest {
     @Test
     public void testEqualsDifferentClass() {
         Task task = new Task(1);
-        Assertions.assertFalse(task.equals("некоторая строка"));
+        Assertions.assertFalse(task.equals("some string"));
     }
 
     @Test

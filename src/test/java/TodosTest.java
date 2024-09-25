@@ -45,50 +45,23 @@ public class TodosTest {
     }
 
     @Test
-    public void testSearchByQueryInTitle() {
-        Task[] expected = {todos.findById(5)};
-        Task[] actual = todos.search("родителям");
-        Assertions.assertArrayEquals(expected, actual);
+    public void testSearchWithQueryParents() {
+        Task[] results = todos.search("родителям");
+        Assertions.assertEquals(1, results.length);
+        Assertions.assertEquals(5, results[0].getId());
     }
 
     @Test
-    public void testSearchByQueryInSubtasks() {
-        Task[] expected = {todos.findById(55)};
-        Task[] actual = todos.search("Молоко");
-        Assertions.assertArrayEquals(expected, actual);
+    public void testSearchWithQueryMilk() {
+        Task[] results = todos.search("Молоко");
+        Assertions.assertEquals(1, results.length);
+        Assertions.assertEquals(55, results[0].getId());
     }
 
     @Test
-    public void testSearchByQueryInTopicOrProject() {
-        Task[] expected = {todos.findById(555)};
-        Task[] actual = todos.search("приложения");
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindByIdNotFound() {
-        Task task = todos.findById(100);
-        Assertions.assertNull(task);
-    }
-
-    @Test
-    public void testFindByIdMultiple() {
-        Task[] expected = {todos.findById(5), todos.findById(55), todos.findById(555)};
-        Task[] actual = new Task[]{todos.findById(5), todos.findById(55), todos.findById(555)};
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void testFindByIdSingle() {
-        Task task = todos.findById(5);
-        Assertions.assertNotNull(task);
-        Assertions.assertEquals(5, task.getId());
-    }
-
-    @Test
-    public void testFindByIdNoResults() {
-        Task[] expected = {};
-        Task[] actual = new Task[0];
-        Assertions.assertArrayEquals(expected, actual);
+    public void testSearchWithQueryApplication() {
+        Task[] results = todos.search("приложения");
+        Assertions.assertEquals(1, results.length);
+        Assertions.assertEquals(555, results[0].getId());
     }
 }
