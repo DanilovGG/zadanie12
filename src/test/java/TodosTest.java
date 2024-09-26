@@ -45,23 +45,42 @@ public class TodosTest {
     }
 
     @Test
-    public void testSearchWithQueryParents() {
-        Task[] results = todos.search("родителям");
-        Assertions.assertEquals(1, results.length);
-        Assertions.assertEquals(5, results[0].getId());
+    void testSearch_FindMultipleTasks() {
+        String query = "родителям";
+        Task[] expectedResult = new Task[]{todos.findById(5)};
+
+        Task[] actualResult = todos.search(query);
+
+        Assertions.assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void testSearchWithQueryMilk() {
-        Task[] results = todos.search("Молоко");
-        Assertions.assertEquals(1, results.length);
-        Assertions.assertEquals(55, results[0].getId());
+    void testSearch_FindOneTask() {
+        String query = "Молоко";
+        Task[] expectedResult = new Task[]{todos.findById(55)};
+
+        Task[] actualResult = todos.search(query);
+
+        Assertions.assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void testSearchWithQueryApplication() {
-        Task[] results = todos.search("приложения");
-        Assertions.assertEquals(1, results.length);
-        Assertions.assertEquals(555, results[0].getId());
+    void testSearch_NoMatchFound() {
+        String query = "Неправильное слово";
+        Task[] expectedResult = new Task[0];
+
+        Task[] actualResult = todos.search(query);
+
+        Assertions.assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void testFindById_ReturnNullWhenNotFound() {
+        int invalidId = 999;
+        Task expectedResult = null;
+
+        Task actualResult = todos.findById(invalidId);
+
+        Assertions. assertEquals(expectedResult, actualResult);
     }
 }

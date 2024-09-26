@@ -7,7 +7,6 @@ public class TasksTest {
     private Meeting meeting;
     private SimpleTask simpleTask;
     private Epic epic;
-    private Todos todos;
 
     @BeforeEach
     public void setUp() {
