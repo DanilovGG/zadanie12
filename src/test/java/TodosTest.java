@@ -8,7 +8,7 @@ public class TodosTest {
 
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
-        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям после обеда");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);

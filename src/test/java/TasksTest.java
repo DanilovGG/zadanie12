@@ -11,7 +11,7 @@ public class TasksTest {
     @BeforeEach
     public void setUp() {
         meeting = new Meeting(555, "Выкатка 3й версии приложения", "Приложение НетоБанка", "12-01-2023 18:00");
-        simpleTask = new SimpleTask(5, "Позвонить родителям");
+        simpleTask = new SimpleTask(5, "Позвонить родителям после обеда");
         epic = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
     }
 
