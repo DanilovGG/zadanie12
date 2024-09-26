@@ -34,7 +34,7 @@ public class TodosTest {
     @BeforeEach
     public void setUp() {
         todos = new Todos();
-        todos.add(new SimpleTask(5, "Позвонить родителям"));
+        todos.add(new SimpleTask(5, "Позвонить родителям после обеда"));
         todos.add(new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"}));
         todos.add(new Meeting(
                 555,
@@ -46,8 +46,8 @@ public class TodosTest {
 
     @Test
     void testSearch_FindMultipleTasks() {
-        String query = "родителям";
-        Task[] expectedResult = new Task[]{todos.findById(5)};
+        String query = "после обеда"; // Поиск по подстроке в названии задачи
+        Task[] expectedResult = new Task[]{todos.findById(5), todos.findById(555)};
 
         Task[] actualResult = todos.search(query);
 
